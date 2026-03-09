@@ -1,15 +1,13 @@
-const video = document.getElementById("video")
-const results = document.getElementById("results")
-const statusBox = document.getElementById("status")
+const video=document.getElementById("video")
+const results=document.getElementById("results")
+const statusBox=document.getElementById("status")
 
-let database = []
+let database=[]
 
-const sites = [
-
+const sites=[
 "https://www.skylinewebcams.com/",
 "https://www.earthcam.com/",
 "https://www.windy.com/webcams"
-
 ]
 
 async function fetchPage(url){
@@ -45,13 +43,9 @@ const div=document.createElement("div")
 div.className="stream"
 
 div.innerHTML=`
-
 <a href="${url}" target="_blank">${url}</a>
-
 <button onclick="play('${url}')">Play</button>
-
 <button onclick="save('${url}')">Save</button>
-
 `
 
 results.appendChild(div)
@@ -81,11 +75,8 @@ video.src=url
 function save(url){
 
 database.push({
-
 name:"Camera "+database.length,
-
 stream:url
-
 })
 
 statusBox.innerText="Saved to database"
@@ -186,3 +177,54 @@ a.download="playlist.m3u"
 a.click()
 
 }
+
+
+/* INSTALL BUTTON */
+
+let deferredPrompt
+
+const installBtn=document.getElementById("installBtn")
+
+if(window.matchMedia("(display-mode: standalone)").matches){
+
+installBtn.style.display="none"
+
+}
+
+window.addEventListener("beforeinstallprompt",(e)=>{
+
+e.preventDefault()
+
+deferredPrompt=e
+
+installBtn.style.display="block"
+
+})
+
+installBtn.addEventListener("click",async()=>{
+
+if(!deferredPrompt) return
+
+deferredPrompt.prompt()
+
+const {outcome}=await deferredPrompt.userChoice
+
+if(outcome==="accepted"){
+
+installBtn.textContent="App Installed"
+
+installBtn.classList.add("installed")
+
+}
+
+deferredPrompt=null
+
+})
+
+window.addEventListener("appinstalled",()=>{
+
+installBtn.textContent="App Installed"
+
+installBtn.classList.add("installed")
+
+})
