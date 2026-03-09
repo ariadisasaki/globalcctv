@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>Global CCTV Scanner</title>
+
+<link rel="stylesheet" href="style.css">
+
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
+</head>
+
+<body>
+
+<h1>🌍 Global CCTV Scanner</h1>
+
+<div class="controls">
+
+<input id="urlInput" placeholder="Masukkan URL halaman webcam">
+
+<button onclick="scanPage()">Scan Halaman</button>
+
+<button onclick="scanDefault()">Scan Website Kamera</button>
+
+<button onclick="exportJSON()">Export JSON</button>
+
+<button onclick="exportM3U()">Generate Playlist</button>
+
+</div>
+
+<div id="status"></div>
+
+<div id="results"></div>
+
+<div class="playerBox">
+
+<h3>Video Player</h3>
+
+<video id="video" controls autoplay></video>
+
+</div>
+
+<script src="app.js"></script>
+
+</body>
+
+</html>
