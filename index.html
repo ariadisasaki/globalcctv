@@ -1,13 +1,18 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 
 <head>
 
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-<title>Global CCTV Scanner</title>
+<title>CCTV SCANNER</title>
+
+<link rel="manifest" href="manifest.json">
 
 <link rel="stylesheet" href="style.css">
+
+<meta name="theme-color" content="#000000">
 
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 
@@ -15,7 +20,15 @@
 
 <body>
 
-<h1>🌍 Global CCTV Scanner</h1>
+<header>
+
+<h1>🌍 CCTV SCANNER</h1>
+
+<button id="installBtn" class="install-btn">Install App</button>
+
+</header>
+
+<main>
 
 <div class="controls">
 
@@ -27,24 +40,29 @@
 
 <button onclick="exportJSON()">Export JSON</button>
 
-<button onclick="exportM3U()">Generate Playlist</button>
+<button onclick="exportM3U()">Export Playlist</button>
 
 </div>
 
 <div id="status"></div>
 
-<div id="results"></div>
+<section id="results"></section>
 
-<div class="playerBox">
+<section class="player">
 
-<h3>Video Player</h3>
+<video id="video" controls autoplay playsinline></video>
 
-<video id="video" controls autoplay></video>
+</section>
 
-</div>
+</main>
 
 <script src="app.js"></script>
 
-</body>
+<script>
+if("serviceWorker" in navigator){
+navigator.serviceWorker.register("service-worker.js")
+}
+</script>
 
+</body>
 </html>
